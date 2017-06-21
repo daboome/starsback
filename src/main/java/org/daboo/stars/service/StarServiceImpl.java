@@ -19,4 +19,14 @@ public class StarServiceImpl implements StarService {
         starRepository.findAll().forEach(stars::add);
         return stars;
     }
+
+    @Override
+    public void saveOrUpdateStar(Star star) {
+        starRepository.save(star);
+    }
+
+    @Override
+    public void deleteStar(Long id) {
+        starRepository.delete(id);
+    }
 }
