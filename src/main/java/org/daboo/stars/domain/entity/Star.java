@@ -1,15 +1,12 @@
 package org.daboo.stars.domain.entity;
 
 import lombok.Data;
-import org.daboo.stars.domain.enums.StarClass;
+import org.daboo.stars.domain.enums.StarType;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-/**
- * Created by daboo on 6/19/17.
- */
 @Data
 @Entity
 public class Star extends AbstractDomainClass {
@@ -17,18 +14,18 @@ public class Star extends AbstractDomainClass {
     private String xcoord;
     private String ycoord;
     @Enumerated(EnumType.STRING)
-    private StarClass starClass;
+    private StarType starType;
     private String discoveredPerson;
 
     public Star() {
     }
 
-    public Star(String starName, String xcoord, String ycoord, StarClass starClass, String discoveredPerson) {
+    public Star(String starName, String xcoord, String ycoord, StarType starType, String discoveredPerson) {
         this();
         this.starName = starName;
         this.xcoord = xcoord;
         this.ycoord = ycoord;
-        this.starClass = starClass;
+        this.starType = starType;
         this.discoveredPerson = discoveredPerson;
     }
 }

@@ -1,6 +1,5 @@
 package org.daboo.stars.controller;
 
-import org.daboo.stars.domain.JwtUser;
 import org.daboo.stars.jwt.JwtAuthenticationRequest;
 import org.daboo.stars.jwt.JwtTokenUtil;
 import org.daboo.stars.service.JwtAuthenticationResponse;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class AuthenticationRestController {
@@ -54,20 +51,6 @@ public class AuthenticationRestController {
 
         // Return the token
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
-    }
-
-    @RequestMapping(value = "refresh", method = RequestMethod.GET)
-    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
-        String token = request.getHeader(tokenHeader);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
-
-        if (jwtTokenUtil.canTokenBeRefreshed(token)) {
-            String refreshedToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
-        } else {
-            return ResponseEntity.badRequest().body(null);
-        }
     }
 
 }

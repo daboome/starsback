@@ -1,18 +1,17 @@
 package org.daboo.stars.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 
-/**
- * Created by daboo on 5/5/17.
- */
 @Data
 @MappedSuperclass
 public class AbstractDomainClass {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
+    @JsonIgnore
     @Version
     Integer version;
 }
