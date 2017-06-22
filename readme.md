@@ -6,13 +6,13 @@ git clone https://github.com/daboome/starsback.git
 
 To start the application type within your working directory
 
-cd starsdemo; mvn spring-boot:run
+cd starsback; mvn spring-boot:run
 
 The application would start the embedded Tomcat web-server on localhost:8080 
 
 To test the application type within your working directory
 
-cd starsdemo; mvn surefire:test
+cd starsback; mvn surefire:test
 
 CAUTION:
 This application happens to work with persistent data.
