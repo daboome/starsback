@@ -18,8 +18,17 @@ import java.util.List;
 
 @Component
 public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+    private int starsCount = 7;
+    private String userName = "user";
+    private String userPassword = "password";
+
     @Autowired
     StarRepository starRepository;
+
+    public Integer getStarsCount() {
+        return starsCount;
+    }
+
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -44,7 +53,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
     }
 
     private void loadUsers() {
-        User user = new User("user", passwordEncoder.encode("password"));
+        User user = new User(userName, passwordEncoder.encode(userPassword));
         List<Authority> authorities = authorityService.getAll();
         authorities.forEach(authority -> {
             if (authority.getAuthorityName().equalsName(AuthorityName.ROLE_USER.name())) {
@@ -55,20 +64,9 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
     }
 
     private void loadStars() {
-        Star star1 = new Star("starName1", "xcoord1", "ycoord1", StarType.BLUE, "pesron1");
-        Star star2 = new Star("starName2", "xcoord2", "ycoord2", StarType.WHITE_BLUE, "pesron2");
-        Star star3 = new Star("starName3", "xcoord3", "ycoord3", StarType.WHITE, "pesron3");
-        Star star4 = new Star("starName4", "xcoord4", "ycoord4", StarType.YELLOW_WHITE, "pesron4");
-        Star star5 = new Star("starName5", "xcoord5", "ycoord5", StarType.YELLOW, "pesron5");
-        Star star6 = new Star("starName6", "xcoord6", "ycoord6", StarType.ORANGE, "pesron6");
-        Star star7 = new Star("starName7", "xcoord7", "ycoord7", StarType.RED, "pesron7");
-
-        starRepository.save(star1);
-        starRepository.save(star2);
-        starRepository.save(star3);
-        starRepository.save(star4);
-        starRepository.save(star5);
-        starRepository.save(star6);
-        starRepository.save(star7);
+        for (int i = 0; i < starsCount; i ++) {
+            Star star = new Star("starName_" + i, "xcoord_" + i, "ycoord_" + i, StarType.values()[i], "pesron_" + i);
+            starRepository.save(star);
+        }
     }
 }

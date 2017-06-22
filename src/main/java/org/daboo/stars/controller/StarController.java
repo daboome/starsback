@@ -25,9 +25,10 @@ public class StarController {
         return getAllStars();
     }
 
-    @RequestMapping(value = "/stars/delete/{id}")
+    @RequestMapping(value = "/stars/delete/{id}", method = RequestMethod.GET)
     public StarsCollection deleteStar(@PathVariable Long id) {
         starService.deleteStar(id);
         return getAllStars();
     }
+
 }

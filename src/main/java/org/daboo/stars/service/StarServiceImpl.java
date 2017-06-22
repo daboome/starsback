@@ -29,4 +29,5 @@ public class StarServiceImpl implements StarService {
     public void deleteStar(Long id) {
         starRepository.delete(id);
     }
+
 }

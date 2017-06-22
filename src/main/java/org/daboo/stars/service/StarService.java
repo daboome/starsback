@@ -10,4 +10,5 @@ public interface StarService {
     void saveOrUpdateStar(Star star);
 
     void deleteStar(Long id);
+
 }
