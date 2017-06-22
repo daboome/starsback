@@ -2,19 +2,34 @@ This is a concept-proof demo Stars application
 
 To clone application into your working directory type
 
-git clone https://github.com/daboome/starsback.git
+    git clone https://github.com/daboome/starsback.git
 
-To start the application type within your working directory
+To start preparations change your current directory to starsback folder
 
-cd starsback; mvn spring-boot:run
+    cd starsback
+
+To run application inside docker container first you need to build artifact.
+To do this within starsback folder type
+ 
+    mvn package
+    
+This would generate the uber-jar artifact that would be used when building a docker image
+Then within current folder type
+
+    mvn docker:build
+    
+This would build ready-to-run docker image containing mentioned uber-jar build at previous step.
+Application requires MySQL database to persist data. MySQL database connection is configured within
+fabric8 maven plugin. This would bring up new MySQL container and set database connection settings.
+
+Finally to run the starback application with its MySQL container dependency type
+
+    mvn docker:run
 
 The application would start the embedded Tomcat web-server on localhost:8080 
 
-To test the application type within your working directory
+To test the application type within your starsback folder
 
-cd starsback; mvn surefire:test
+    mvn surefire:test
 
-CAUTION:
-This application happens to work with persistent data.
-MySQL database connection is required. To run the application install and start MySQL database server 
-with username root and empty password, or use docker container. Stars database schema first needs to be created.
+Integration tests will be executed against in-memory H2 database.
